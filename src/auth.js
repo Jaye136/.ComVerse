@@ -30,32 +30,31 @@ export async function logoffUser() {
     currUser = undefined;
 }
 
-// check if user has permission to view ids of users
-export function canSeeIdentity() {
-    if (currUser === undefined) return false;
-    if (currUser.role == 'member') return false;
-    return true;
-}
+// deprecated, now checks user information directly
+// // check if user has permission to view ids of users
+// export function canSeeIdentity() {
+//     if (currUser === undefined) return false;
+//     if (currUser.role == 'member') return false;
+//     return true;
+// }
 
-// check if user has permission to view promotion/demotion function
-export function canProDemote() {
-    if (currUser === undefined) return false;
-    if (currUser.role == 'member') return false;
-    return true;
-}
+// // check if user has permission to view promotion/demotion function
+// export function canProDemote() {
+//     if (currUser === undefined) return false;
+//     if (currUser.role == 'member') return false;
+//     return true;
+// }
 
-// check if user can delete comment
-export function canDelCom(comment) {
-    if (currUser === undefined) return false;
-    if (currUser.role == 'mod') return true;
-    if (currUser.id == comment.author) return true;
-    return false;
-}
+// // check if user can delete comment regardless if they're the author
+// export function canDelCom() {
+//     if (currUser === undefined) return false;
+//     if (currUser.role == 'mod') return true;
+//     return false;
+// }
 
-// check if user can delete post
-export function canDelPost(post) {
-    if (currUser === undefined) return false;
-    if (currUser.role == 'mod') return true;
-    if (currUser.id == post.author) return true;
-    return false;
-}
+// // check if user can delete posts regardless if they're the author
+// export function canDelPost() {
+//     if (currUser === undefined) return false;
+//     if (currUser.role == 'mod') return true;
+//     return false;
+// }

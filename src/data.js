@@ -54,21 +54,21 @@ async function loadNestComments(comment) {
 }
 
 // load comments & users in the format below
-// [ {{comment, username}, {{comment, username}, {comment, username}}}, {{comment, poster}, {{}}} ]
+// [ {{comment, [username, id]}, {{comment, [username, id]}}, {{comment, [username, id]}, {{}} ]
 export async function loadAllComments(post) {
     const topComments = await loadTopComments(post.id);
     const commentChunks = [];
     for (const comment of topComments) {
         const [topPosterRow] = await connectionPool.query('CALL fetchUser(?)', [comment.author]);
         const topPoster = topPosterRow[0][0];
-        const topChunk = [comment, topPoster.username];
+        const topChunk = [comment, [topPoster.username, topPoster.id]];
 
         const nestComments = await loadNestComments(comment.id);
         const nestChunks = [];
         for (const nestComment of nestComments) {
             const [nestPosterRow] = await connectionPool.query('CALL fetchUser(?)', [nestComment.author]);
             const nestPoster = nestPosterRow[0][0];
-            nestChunks.push([nestComment, nestPoster.username]);
+            nestChunks.push([nestComment, [nestPoster.username, nestPoster.id]]);
         }
         commentChunks.push([topChunk, nestChunks]);
     }
