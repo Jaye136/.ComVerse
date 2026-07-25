@@ -1,6 +1,9 @@
 <div class="menu">
     <h1 style="color:white; padding-bottom:5px">ForumPage</h1>
     <ul style="list-style:none; display:flex;">
+        <% if (currUser && currUser.role == 'mod') { %>
+            <li><a href="#"> Moderation</a></li>
+        <% } %>
         <li><a href="/posts"> Posts</a></li>
         <li><a href="/newpost"> New Post</a></li>
         <li><a href="https://github.com/Jaye136/forum-site"> GitHub</a></li>

@@ -48,6 +48,7 @@
                 <% commentChunks.forEach(commentBit => {
                     const topComment = commentBit[0][0];
                     const topAuthor = commentBit[0][1][0];
+                    const comAuthorID = commentBit[0][1][1];
                     const nestComments = commentBit[1];
                 %>
                     <li style="margin-bottom:20px">
@@ -60,13 +61,15 @@
                                 }) %>
                             </p>
                         </div>
+                        <%- include ('partials/comptions.ejs') %>
                         <p style="margin-top:10px; margin-bottom:10px"><%= topComment.contents %></p>
 
                         <% if (nestComments.length > 0) { %>
                             <ul class="reply-reply-list">
-                                <% nestComments.forEach(nestbit => {
-                                    const nestComments = nestbit[0];
-                                    const nestAuthor = nestbit[1][0];
+                                <% nestComments.forEach(nestBit => {
+                                    const nestComments = nestBit[0];
+                                    const nestAuthor = nestBit[1][0];
+                                    const comAuthorID = nestBit[1][1];
                                 %>
                                     <li class="reply-reply-item">
                                         <div class="compost-sidetoside">
@@ -78,6 +81,7 @@
                                                 }) %>
                                             </p>
                                         </div>
+                                        <%- include ('partials/comptions.ejs') %>
                                         <p style="margin-top:10px; margin-bottom:-15px"><%= nestComments.contents %></p>
                                     </li>
                                 <% })%>

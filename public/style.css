@@ -118,6 +118,12 @@ img {
     position: relative;
 }
 
+.comption-links {
+    text-align: right;
+    margin-top: 0px;
+    margin-bottom: -8px;
+}
+
 .reply-reply-list {
     list-style: none;
     padding-left: 35px;
