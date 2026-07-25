@@ -23,9 +23,26 @@
         <hr>
         
         <h2>Comments</h2>
-        <p>add some way to check if user is logged in & add comments here</p>
+        <% if (!currUser) { %>
+            <p><a href="/login">Log in</a> to add a comment.</p>
+        <% } else { %>
+            <form action="/posts/<%= post.id %>" method="post">
+                <div class="compost-sidetoside">
+                    <label for="comment" style="margin-bottom:5px; align-self:center; margin-bottom:30px;">
+                        Comment (max 500 characters)</label>
+                    <button type="submit" style="font-family:inherit; align-self:center; margin-bottom:30px;">
+                        Add comment</button>
+                </div>
+                <textarea id="comment" name="comment" maxlength=500 placeholder="Add something to the conversation..."
+                    class="stiff-commentfield needtext-no-startn" style="margin-bottom:5px;" autocomplete="off"
+                    required></textarea>
+                <input type="hidden" name="parent" value="<%= post.id %>"></input>
+                <input type="hidden" name="parType" value="p"></input>
+            </form>
+        <% } %>
+
         <% if (commentChunks.length == 0) { %>
-            <p>No comments so far</p>
+            <p style="margin-top:25px">No comments so far.</p>
         <% } else { %>
             <ul class="compost-list">
                 <% commentChunks.forEach(commentBit => {
@@ -34,39 +51,44 @@
                     const nestComments = commentBit[1];
                 %>
                     <li style="margin-bottom:20px">
-                    <div class="compost-sidetoside">
-                    <h3><%= topAuthor %></h3>
-                    <p><%= topComment.timestamp.toLocaleString(undefined, {
-                        timeStyle: 'short',
-                        dateStyle: 'medium'
-                    }) %></p>
-                    </div>
-                    <p style="margin-top:10px; margin-bottom:10px"><%= topComment.contents %></p>
+                        <div class="compost-sidetoside">
+                            <h3><%= topAuthor %></h3>
+                            <p>
+                                <%= topComment.timestamp.toLocaleString(undefined, {
+                                    timeStyle: 'short',
+                                    dateStyle: 'medium'
+                                }) %>
+                            </p>
+                        </div>
+                        <p style="margin-top:10px; margin-bottom:10px"><%= topComment.contents %></p>
 
-                    <% if (nestComments.length > 0) { %>
-                        <ul class="reply-reply-list">
-                            <% nestComments.forEach(nestbit => {
-                                const nestComments = nestbit[0];
-                                const nestAuthor = nestbit[1];
-                            %>
-                                <li class="reply-reply-item">
-                                    <div class="compost-sidetoside">
-                                    <h3><%= nestAuthor %></h3>
-                                    <p><%= nestComments.timestamp.toLocaleString(undefined, {
-                                        timeStyle: 'short',
-                                        dateStyle: 'medium'
-                                    }) %></p>
-                                    </div>
-                                    <p style="margin-top:10px; margin-bottom:-15px"><%= nestComments.contents %></p>
-                                </li>
-                            <% })%>
-                        </ul>
-                    <% } %>
+                        <% if (nestComments.length > 0) { %>
+                            <ul class="reply-reply-list">
+                                <% nestComments.forEach(nestbit => {
+                                    const nestComments = nestbit[0];
+                                    const nestAuthor = nestbit[1];
+                                %>
+                                    <li class="reply-reply-item">
+                                        <div class="compost-sidetoside">
+                                            <h3><%= nestAuthor %></h3>
+                                            <p>
+                                                <%= nestComments.timestamp.toLocaleString(undefined, {
+                                                    timeStyle: 'short',
+                                                    dateStyle: 'medium'
+                                                }) %>
+                                            </p>
+                                        </div>
+                                        <p style="margin-top:10px; margin-bottom:-15px"><%= nestComments.contents %></p>
+                                    </li>
+                                <% })%>
+                            </ul>
+                        <% } %>
                     </li>
                 <% }) %>
             </ul>
         <% } %>
     </div>
+    <script src="/needtext.js"></script>
 </body>
 
 </html>

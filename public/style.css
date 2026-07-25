@@ -72,12 +72,22 @@ img {
     max-width: 800px;
 }
 
-.expand-titlefield {
+.stiff-titlefield {
     font-family: inherit;
     display: block;
     resize: none;
     width: 95%;
     height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stiff-commentfield {
+    font-family: inherit;
+    display: block;
+    resize: none;
+    width: 95%;
+    height: 80px;
     margin-left: auto;
     margin-right: auto;
 }

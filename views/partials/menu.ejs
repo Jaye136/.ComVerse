@@ -1,6 +1,6 @@
 <div class="menu">
     <h1 style="color:white; padding-bottom:5px">ForumPage</h1>
-    <ul style="list-style: none; display: flex;">
+    <ul style="list-style:none; display:flex;">
         <li><a href="/posts"> Posts</a></li>
         <li><a href="/newpost"> New Post</a></li>
         <li><a href="https://github.com/Jaye136/forum-site"> GitHub</a></li>
@@ -12,7 +12,7 @@
                         <li><a href="/login">Log in</a></li>
                     </ul>
                 </div>
-                <% } else { %>
+        <% } else { %>
             <li><a href="#"><%= currUser.username %> ▼</a>
                 <div class="dropdown">
                     <ul>
@@ -20,6 +20,6 @@
                     </ul>
                 </div>
             </li>
-            <% } %>
+        <% } %>
     </ul>
 </div>

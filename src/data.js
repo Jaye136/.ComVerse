@@ -29,15 +29,15 @@ const generateID = function (type) {
 
 // add a top level comment (reply to post)
 export async function addTopComment(contents, author, post) {
-    const [topment] = await connectionPool.query('CALL addCommentTop(?, ?, NOW(), ?, ?, ?)',
-        [contents, author, 'active', 'p' + generateID('c'), post]);
+    const [topment] = await connectionPool.query('CALL addComment(?, ?, NOW(), ?, ?, ?)',
+        [contents, author, 'active', generateID('c'), ['p' + post]]);
     return topment[0][0];
 }
 
 // add a nested comment (reply to comment)
 export async function addNestComment(contents, author, comment) {
-    const [nestment] = await connectionPool.query('CALL addCommentNest(?, ?, NOW(), ?, ?, ?)',
-        [contents, author, 'active', 'c' + generateID('c'), comment]);
+    const [nestment] = await connectionPool.query('CALL addComment(?, ?, NOW(), ?, ?, ?)',
+        [contents, author, 'active', generateID('c'), ['c' + comment]]);
     return nestment[0][0];
 }
 

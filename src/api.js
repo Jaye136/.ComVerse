@@ -1,5 +1,5 @@
 import express from "express";
-import { addNewPost, loadAllComments, loadPost, refreshPosts } from "./data.js";
+import { addNewPost, addTopComment, loadAllComments, loadPost, refreshPosts } from "./data.js";
 import { loadSchema } from "./database.js";
 import { currUser } from "./auth.js";
 import { testStuff } from "./testfns.js";
@@ -46,6 +46,15 @@ app.post("/posts", async (req, res) => {
     const postData = req.body;
     const newPost = await addNewPost(postData.title, postData.contents, currUser.id);
     res.redirect(`posts/${newPost.id}`);
+});
+
+app.post("/posts/:id", async (req, res) => {
+    const comData = req.body;
+    console.log(comData);
+    if (comData.parType == 'p') {
+        await addTopComment(comData.comment, currUser.id, comData.parent);
+    }
+    res.redirect(`/posts/${req.params.id}`);
 });
 
 app.get("/login", (req, res) => {
