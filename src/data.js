@@ -41,6 +41,11 @@ export async function addNestComment(contents, author, comment) {
     return nestment[0][0];
 }
 
+// delete a comment
+export async function deleteComment(comment) {
+    const [comToDel] = await connectionPool.query('CALL deleteComment(?)', [comment]);
+}
+
 // load top level comments on this post
 async function loadTopComments(post) {
     const [topcoms] = await connectionPool.query('CALL fetchTopComment(?)', ['p' + post]);

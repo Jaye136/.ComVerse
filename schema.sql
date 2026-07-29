@@ -70,6 +70,7 @@ END;
 
 
 DROP PROCEDURE IF EXISTS addComment;
+DROP PROCEDURE IF EXISTS deleteComment;
 DROP PROCEDURE IF EXISTS fetchTopComment;
 DROP PROCEDURE IF EXISTS fetchNestedComment;
 
@@ -86,6 +87,14 @@ BEGIN
 	INSERT INTO comments (contents, author, timestamp, status, id, parent)
 	VALUES (cont, poster, time, delstat, uuid, rep2what);
     SELECT * FROM comments WHERE id = uuid;
+END;
+
+CREATE PROCEDURE deleteComment
+(
+	IN uuid CHAR(8)
+)
+BEGIN
+	UPDATE comments SET status = 'deleted' WHERE id = uuid;
 END;
 
 CREATE PROCEDURE fetchTopComment

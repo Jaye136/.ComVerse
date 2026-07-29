@@ -1,9 +1,73 @@
-<!-- <% if (currUser) { %>
-    if (currUser.id == post.id) { %>
-        <p class="comption-links"><a href="#">Reply</a> | <a href="#">Delete</a></p>
-    <% } else if (mod) { %>
-        <p class="comption-links"><a href="#">Reply</a> | <a href="#">Delete</a></p>
+<% let replyField %>
+<% if (currUser) { %>
+    <% if (authCheck) { %>
+        <% if (comment.status == 'deleted') { %>
+            <div style="display:flex; justify-content:space-between;">
+                <p class="comption-links" style="color:rgb(132, 132, 132)">User ID:<%= comAuthorID %></p>
+                <div class="comption-links">
+                    <button id="replyText" class="button-aslink" onclick="toggleTextField('<%= comment.id %>')">Reply</button>
+                </div>
+            </div>
+        <% } else { %>
+            <div style="display:flex; justify-content:space-between;">
+                <p class="comption-links" style="color:rgb(132, 132, 132)">User ID:<%= comAuthorID %></p>
+                <div class="comption-links">
+                    <form action="/posts/<%= post.id %>/delcom" method="post" style="display:inline;">
+                        <input type="hidden" name="comAuthorID" value="<%= comAuthorID %>">
+                        <input type="hidden" name="commentID" value="<%= comment.id %>">
+                        <button type="submit" class="button-aslink">Delete</button>
+                    </form> | <button id="replyText" class="button-aslink" onclick="toggleTextField('<%= comment.id %>')">Reply</button>
+                </div>
+            </div>
+        <% } %>
+    <% } else { %>
+        <% if (comment.status == 'deleted' || currUser.id != comAuthorID) { %>
+            <div class="comption-links">
+                <button id="replyText" class="button-aslink" onclick="toggleTextField('<%= comment.id %>')">Reply</button>
+            </div>
+        <% } else { %>
+            <div class="comption-links">
+                <form action="/posts/<%= post.id %>/delcom" method="post" style="display:inline;">
+                    <input type="hidden" name="comAuthorID" value="<%= comAuthorID %>">
+                    <input type="hidden" name="commentID" value="<%= comment.id %>">
+                    <button type="submit" class="button-aslink">Delete</button>
+                </form> | <button class="button-aslink" onclick="toggleTextField('<%= comment.id %>')">Reply</button></form>
+            </div>
+        <% } %>
     <% } %>
-<% } %> -->
+<% } %>
 
-<p class="comption-links"><a href="#">Reply</a> | <a href="#">Delete</a></p>
+<% if (comment.status == 'active') { %>
+    <p style="margin-top:7px; margin-bottom:10px"><%= comment.contents %></p>
+<% } else if (comment.status == 'deleted' && authCheck) { %>
+    <p style="margin-top:7px; margin-bottom:10px; color:rgb(132, 132, 132)">
+        Deleted message: <%= comment.contents %></p>
+<% } else { %>
+    <p style="margin-top:7px; margin-bottom:10px"> [Deleted] </p>
+<% } %>
+
+<div id="reply-to-<%= comment.id %>" style="display:none;">
+    <form action="/posts/<%= post.id %>/comment" method="post">
+        <div class="compost-sidetoside">
+            <textarea id="comment" name="comment" maxlength=500 placeholder="Add a reply..."
+                class="stiff-small-commentfield needtext-no-startn" autocomplete="off" required></textarea>
+            <input type="hidden" name="parent" value="<%= comment.id %>"></input>
+            <input type="hidden" name="parType" value="c"></input>
+            <button type="submit" style="font-family:inherit; align-self:center; margin-bottom:30px;">Add reply</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function toggleTextField(commentID) {
+        const comField = document.getElementById(`reply-to-${commentID}`);
+        const replyText = document.getElementById('replyText');
+        if (comField.style.display == 'none') {
+            comField.style.display = 'block';
+            replyText.textContent = 'Cancel';
+        } else {
+            comField.style.display = 'none';
+            replyText.textContent = 'Reply';
+        }
+    }
+</script>

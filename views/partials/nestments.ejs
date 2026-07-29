@@ -1,0 +1,21 @@
+<% if (nestComments.length> 0) { %>
+    <ul class="reply-reply-list">
+        <% nestComments.forEach(nestBit=> {
+            comment = nestBit[0];
+            author = nestBit[1][0];
+            comAuthorID = nestBit[1][1];
+            %>
+            <li class="reply-reply-item">
+                <div class="compost-sidetoside" style="z-index:-1;">
+                    <h3>
+                        <%= author %>
+                    </h3>
+                    <p>
+                        <%= comment.timestamp.toLocaleString(undefined, { timeStyle: 'short' , dateStyle: 'medium' }) %>
+                    </p>
+                </div>
+                <%- include ('comptions.ejs', { comAuthorID, comment }) %>
+            </li>
+            <% })%>
+    </ul>
+<% } %>
