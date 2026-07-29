@@ -31,7 +31,6 @@ app.get('/posts/:id', async (req, res) => {
     const post = loadResult[0];
     const poster = loadResult[1];
     const commentChunks = await loadAllComments(post);
-    console.log(commentChunks);
     res.render("post.ejs", { post, poster, commentChunks, currUser, authCheck:(currUser && currUser.role == 'mod') });
 });
 
