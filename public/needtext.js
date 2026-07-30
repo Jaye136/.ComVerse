@@ -1,7 +1,7 @@
 const needtext = document.querySelectorAll('.needtext');
 const needtext_no_ws = document.querySelectorAll('.needtext-no-ws');
 const needtext_no_startn = document.querySelectorAll('.needtext-no-startn');
-const needtext_no_tn_startws = document.querySelectorAll('.needtext-no-tn-startws');
+const needtext_no_tn_startendws = document.querySelectorAll('.needtext-no-tn-startendws');
 
 needtext.forEach(input => {
     input.addEventListener('input', function() { // pass if there is some content that is non-whitespace
@@ -35,12 +35,14 @@ needtext_no_startn.forEach(input => {
     });
 });
 
-needtext_no_tn_startws.forEach(input => {
+needtext_no_tn_startendws.forEach(input => {
     input.addEventListener('input', function () { // no tab/newline, no whitespace at start
         if (/[\t\n]/.test(input.value)) {
             input.setCustomValidity('Input cannot contain tab or newline.');
         } else if (/^\s/.test(input.value)) {
             input.setCustomValidity('Input cannot start with whitespace.');
+        } else if (/\s$/.test(input.value)) {
+            input.setCustomValidity('Input cannot end with whitespace.');
         } else {
             input.setCustomValidity('');
         }
