@@ -116,6 +116,7 @@ END;
 
 
 DROP PROCEDURE IF EXISTS addPost;
+DROP PROCEDURE IF EXISTS deletePost;
 DROP PROCEDURE IF EXISTS fetchPost;
 DROP PROCEDURE IF EXISTS fetchPosts;
 
@@ -132,6 +133,14 @@ BEGIN
 	INSERT INTO posts (title, contents, author, timestamp, id, status)
 	VALUES (head, cont, poster, time, uuid, delstat);
     SELECT * FROM posts WHERE id = uuid;
+END;
+
+CREATE PROCEDURE deletePost
+(
+	IN uuid CHAR(8)
+)
+BEGIN
+	UPDATE posts SET status = 'deleted' WHERE id = uuid;
 END;
 
 CREATE PROCEDURE fetchPost

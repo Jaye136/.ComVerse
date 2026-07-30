@@ -43,7 +43,7 @@ export async function addNestComment(contents, author, comment) {
 
 // delete a comment
 export async function deleteComment(comment) {
-    const [comToDel] = await connectionPool.query('CALL deleteComment(?)', [comment]);
+    await connectionPool.query('CALL deleteComment(?)', [comment]);
 }
 
 // load top level comments on this post
@@ -106,6 +106,11 @@ export async function addNewPost(title, contents, author) {
     const [post] = await connectionPool.query('CALL addPost(?, ?, ?, NOW(), ?, ?)',
         [title, contents, author, generateID('p'), 'active']);
     return post[0][0];
+}
+
+// delete a post
+export async function deletePost(post) {
+    await connectionPool.query('CALL deletePost(?)', [post]);
 }
 
 export async function loadPost(id) {
