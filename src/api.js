@@ -1,5 +1,5 @@
 import express from "express";
-import { addNewPost, addTopComment, addNestComment, deleteComment, loadAllComments, loadPost, refreshPosts } from "./data.js";
+import { addTopComment, addNestComment, deleteComment, loadAllComments, addNewPost, deletePost, loadPost, refreshPosts } from "./data.js";
 import { loadSchema } from "./database.js";
 import { currUser } from "./auth.js";
 import { testStuff } from "./testfns.js";
@@ -34,6 +34,14 @@ app.get('/posts/:id', async (req, res) => {
     res.render("post.ejs", { post, poster, commentChunks, currUser, authCheck:(currUser && currUser.role == 'mod') });
 });
 
+app.post("/posts/:id/delpost", async (req, res) => {
+    const postData = req.body;
+    if (currUser && (currUser.role == 'mod' || postData.postAuthorID == currUser.id)) {
+        await deletePost(req.params.id);
+    }
+    res.redirect(`/posts/${req.params.id}`);
+});
+
 app.post("/posts/:id/comment", async (req, res) => {
     const comData = req.body;
     if (comData.parType == 'p') {
@@ -46,7 +54,6 @@ app.post("/posts/:id/comment", async (req, res) => {
 
 app.post("/posts/:id/delcom", async (req, res) => {
     const comData = req.body;
-    console.log("delete request made");
     if (currUser && (currUser.role == 'mod' || comData.comAuthorID == currUser.id)) {
         await deleteComment(comData.commentID);
     }

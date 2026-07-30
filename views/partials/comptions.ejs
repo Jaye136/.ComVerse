@@ -38,12 +38,13 @@
 <% } %>
 
 <% if (comment.status == 'active') { %>
-    <p style="margin-top:7px; margin-bottom:10px; white-space:pre"><%= comment.contents %></p>
+    <p style="margin-top:7px; margin-bottom:10px; white-space:pre-wrap"><%= comment.contents %></p>
 <% } else if (comment.status == 'deleted' && authCheck) { %>
-    <p style="margin-top:7px; margin-bottom:10px; color:rgb(132, 132, 132);">
-    Deleted message: <span style="white-space:pre"><%= comment.contents %></span></p>
+    <p style="margin-top:7px; margin-bottom:10px; color:rgb(132, 132, 132); 
+        white-space:pre-wrap">Deleted message: <%= comment.contents %></p>
 <% } else { %>
-    <p style="margin-top:7px; margin-bottom:10px">[Deleted] </p>
+    <p style="margin-top:7px; margin-bottom:10px; color:rgb(132, 132, 132);
+        white-space:pre-wrap">[Comment has been deleted]</p>
 <% } %>
 
 <div id="reply-to-<%= comment.id %>" style="display:none;">
