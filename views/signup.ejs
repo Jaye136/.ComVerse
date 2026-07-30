@@ -16,18 +16,18 @@
             <form action="/signup" method="post">
                 <label for="user" style="margin-bottom:5px;">Display name (max 12 characters)</label>
                 <textarea id="user" name="user" maxlength=12 placeholder="What's your name?"
-                    class="stiff-userpassfield needtext-no-tn-startws" style="margin-bottom:15px;" autocomplete="off"
-                    required></textarea>
+                    class="stiff-userpassfield needtext-no-tn-startws" autocomplete="off" required></textarea>
                 <label for="pass" style="margin-bottom:5px;">Password (max 12 characters)</label>
                 <textarea id="pass" name="pass" maxlength=12 placeholder="Enter a password..."
-                    class="stiff-userpassfield needtext_no_ws" style="margin-bottom:15px;" autocomplete="off"
-                    required></textarea>
+                    class="stiff-userpassfield needtext_no_ws" autocomplete="off" required></textarea>
 
                 <button type="submit" style="bottom:50px; font-family:inherit; height:40px;">Register</button>
             </form>
             <br>
             <p>Returning user? Login <a href="/login">here</a></p>
         </div>
+        
+    <script src="/needtext.js"></script>
 </body>
 
 </html>

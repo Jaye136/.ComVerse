@@ -1,7 +1,7 @@
 import express from "express";
 import { addTopComment, addNestComment, deleteComment, loadAllComments, addNewPost, deletePost, loadPost, refreshPosts, registerUser } from "./data.js";
 import { loadSchema } from "./database.js";
-import { currUser, logoffUser, setUserSignUp } from "./auth.js";
+import { currUser, loginUser, logoffUser, setUserSignUp } from "./auth.js";
 import { testStuff } from "./testfns.js";
 const app = express();
 const port = 3000; // high number = lower access
@@ -80,7 +80,17 @@ app.post("/posts", async (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    res.render("login.ejs");
+    res.render("login.ejs", { wrongUUID: '', failed: false });
+});
+
+app.post("/login", async (req, res) => {
+    const userData = req.body;
+    const loginTry = await loginUser(userData.uuid, userData.pass);
+    if (loginTry) {
+        res.redirect("/posts");
+    } else {
+        res.render("login.ejs", { wrongUUID: userData.uuid, failed: true });
+    }
 });
 
 app.get("/signup", (req, res) => {

@@ -10,13 +10,30 @@
 
 <body>
     <%- include ('partials/menu.ejs') %>
-        <div class="contents">
+        <div class="contents-userstuffs">
             <h1>Log in</h1>
-            <p>Log in to create and comment on posts.</p>
-            <p>login stuff</p>
+
+            <% if (failed) { %>
+                <p>No match found for given uuid-password pair.</p>
+            <% } %>
+            
+            <form action="/login" method="post">
+                <label for="uuid" style="margin-bottom:5px;">User authentication ID (8 characters)</label>
+                <textarea id="uuid" name="uuid" minlength=8 maxlength=8 placeholder="UUID"
+                    class="stiff-userpassfield needtext_no_ws" autocomplete="off"
+                    required><%= wrongUUID %></textarea>
+                <label for="pass" style="margin-bottom:5px;">Password (max 12 characters)</label>
+                <textarea id="pass" name="pass" maxlength=12 placeholder="Password"
+                    class="stiff-userpassfield needtext_no_ws" style="-webkit-text-security:disc;"
+                    autocomplete="off" required></textarea>
+
+                <button type="submit" style="bottom:50px; font-family:inherit; height:40px;">Log in</button>
+            </form>
             <br>
             <p>New user? Signup <a href="/signup">here</a></p>
         </div>
+
+    <script src="/needtext.js"></script>
 </body>
 
 </html>

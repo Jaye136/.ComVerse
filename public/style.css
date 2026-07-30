@@ -97,10 +97,12 @@ img {
 }
 
 .stiff-userpassfield {
-    font-family: inherit;
+    font-family: monospace;
+    font-size: x-large;
     display: block;
     resize: none;
     height: 30px;
+    margin-bottom: 15px;
 }
 
 .stiff-titlefield {
