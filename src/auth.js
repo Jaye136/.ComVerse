@@ -29,32 +29,3 @@ export async function loginUser(id, pass) {
 export async function logoffUser() {
     currUser = undefined;
 }
-
-// deprecated, now checks user information directly
-// // check if user has permission to view ids of users
-// export function canSeeIdentity() {
-//     if (currUser === undefined) return false;
-//     if (currUser.role == 'member') return false;
-//     return true;
-// }
-
-// // check if user has permission to view promotion/demotion function
-// export function canProDemote() {
-//     if (currUser === undefined) return false;
-//     if (currUser.role == 'member') return false;
-//     return true;
-// }
-
-// // check if user can delete comment regardless if they're the author
-// export function canDelCom() {
-//     if (currUser === undefined) return false;
-//     if (currUser.role == 'mod') return true;
-//     return false;
-// }
-
-// // check if user can delete posts regardless if they're the author
-// export function canDelPost() {
-//     if (currUser === undefined) return false;
-//     if (currUser.role == 'mod') return true;
-//     return false;
-// }

@@ -8,15 +8,20 @@ const port = 3000; // high number = lower access
 
 app.set("view engine", "ejs");
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-
 await loadSchema();
 await testStuff();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+app.use((res, req, next) => {
+    req.locals.currUser = currUser;
+    req.locals.authCheck = (currUser && currUser.role == 'mod');
+    next();
+});
+
 app.get('/posts', async (req, res) => {
     const postList = await refreshPosts();
-    res.render("fpage.ejs", { postList, currUser, authCheck:(currUser && currUser.role == 'mod') }
+    res.render("fpage.ejs", { postList }
     );
 });
 
@@ -25,13 +30,13 @@ app.get('/posts/:id', async (req, res) => {
     const loadResult = await loadPost(id);
 
     if (loadResult.length == 0) {
-        return res.status(404).render("post404.ejs", { currUser, authCheck:(currUser && currUser.role == 'mod') });
+        return res.status(404).render("page404.ejs");
     }
     
     const post = loadResult[0];
     const poster = loadResult[1];
     const commentChunks = await loadAllComments(post);
-    res.render("post.ejs", { post, poster, commentChunks, currUser, authCheck:(currUser && currUser.role == 'mod') });
+    res.render("post.ejs", { post, poster, commentChunks });
 });
 
 app.post("/posts/:id/delpost", async (req, res) => {
@@ -64,7 +69,7 @@ app.get("/newpost", (req, res) => {
     if (!currUser) {
         res.redirect("/login");
     } else {
-        res.render("newpost.ejs", { currUser, authCheck:(currUser && currUser.role == 'mod') });
+        res.render("newpost.ejs");
     }
 });
 
@@ -75,19 +80,31 @@ app.post("/posts", async (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    res.render("login.ejs", { currUser, authCheck:(currUser && currUser.role == 'mod') });
+    res.render("login.ejs");
 });
 
 app.get("/signup", (req, res) => {
-    res.render("signup.ejs", { currUser, authCheck:(currUser && currUser.role == 'mod') });
+    res.render("signup.ejs");
 });
 
 app.get("/logoff", (req, res) => {
-    res.render("logoff.ejs", { currUser, authCheck:(currUser && currUser.role == 'mod') });
+    res.render("logoff.ejs");
 });
 
 app.get("/", (req, res) => {
-    res.send("<h1>Hello World!</h1>");
+    res.redirect("/posts");
+});
+
+app.get("/moderation", (req, res) => {
+    if (authCheck) {
+        //
+    } else {
+        return res.status(404).render("page404.ejs");
+    }
+});
+
+app.use((req, res) => {
+    return res.status(404).render("page404.ejs");
 });
 
 // start listening for http requests
