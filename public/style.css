@@ -42,6 +42,25 @@ img {
     color: #8FBC8B;
 }
 
+.menu ul li form button {
+    /*
+    Source - https://stackoverflow.com/a/1368286
+    Posted by adardesign, modified by community. See post 'Timeline' for change history
+    Retrieved 2026-07-28, License - CC BY-SA 4.0
+    */        
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: medium;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.menu ul li form button:hover {
+    color: #8FBC8B;
+}
+
 .dropdown {
     display: none;
 }

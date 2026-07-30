@@ -19,7 +19,11 @@
             <li><a href="#"><%= currUser.username %> ▼</a>
                 <div class="dropdown">
                     <ul>
-                        <li><a href="/logoff">Log off</a></li>
+                        <li style="padding-top: 10px; padding-left: 5px; padding-right: 5px; padding-bottom: 10px;">
+                            <form action="/logoff" method="post" style="align-items:start;">
+                                <button type="submit">Log off</button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </li>

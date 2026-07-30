@@ -1,7 +1,7 @@
 import express from "express";
 import { addTopComment, addNestComment, deleteComment, loadAllComments, addNewPost, deletePost, loadPost, refreshPosts, registerUser } from "./data.js";
 import { loadSchema } from "./database.js";
-import { currUser, setUserSignUp } from "./auth.js";
+import { currUser, logoffUser, setUserSignUp } from "./auth.js";
 import { testStuff } from "./testfns.js";
 const app = express();
 const port = 3000; // high number = lower access
@@ -94,9 +94,10 @@ app.post("/signup", async (req, res) => {
     res.render("signedup.ejs", { uuid: newUser.id });
 });
 
-// app.get("/logoff", (req, res) => {
-//     res.render("logoff.ejs");
-// });
+app.post("/logoff", (req, res) => {
+    logoffUser();
+    res.redirect(req.get('Referrer'));
+});
 
 app.get("/", (req, res) => {
     res.redirect("/posts");
