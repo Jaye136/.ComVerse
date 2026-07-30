@@ -8,9 +8,12 @@
             %>
             <li class="reply-reply-item">
                 <div class="compost-sidetoside" style="z-index:-1;">
-                    <h3>
-                        <%= author %>
-                    </h3>
+                    <% if (post.author == comAuthorID) { %>
+                        <h3 style="display:inline;"><%= author %>&nbsp;
+                            <span style="font-size:16px; color:rgb(132, 132, 132)">OP</span></h3>
+                    <% } else { %>
+                        <h3><%= author %></h3>
+                    <% } %>
                     <p>
                         <%= comment.timestamp.toLocaleString(undefined, { timeStyle: 'short' , dateStyle: 'medium' }) %>
                     </p>
