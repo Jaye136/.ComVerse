@@ -1,7 +1,7 @@
 import express from "express";
-import { addTopComment, addNestComment, deleteComment, loadAllComments, addNewPost, deletePost, loadPost, refreshPosts } from "./data.js";
+import { addTopComment, addNestComment, deleteComment, loadAllComments, addNewPost, deletePost, loadPost, refreshPosts, registerUser } from "./data.js";
 import { loadSchema } from "./database.js";
-import { currUser } from "./auth.js";
+import { currUser, setUserSignUp } from "./auth.js";
 import { testStuff } from "./testfns.js";
 const app = express();
 const port = 3000; // high number = lower access
@@ -87,9 +87,16 @@ app.get("/signup", (req, res) => {
     res.render("signup.ejs");
 });
 
-app.get("/logoff", (req, res) => {
-    res.render("logoff.ejs");
+app.post("/signup", async (req, res) => {
+    const userData = req.body;
+    const newUser = await registerUser(userData.user, userData.pass);
+    setUserSignUp(newUser);
+    res.render("signedup.ejs", { uuid: newUser.id });
 });
+
+// app.get("/logoff", (req, res) => {
+//     res.render("logoff.ejs");
+// });
 
 app.get("/", (req, res) => {
     res.redirect("/posts");
@@ -97,7 +104,7 @@ app.get("/", (req, res) => {
 
 app.get("/moderation", (req, res) => {
     if (authCheck) {
-        //
+        res.render("moderation.ejs");
     } else {
         return res.status(404).render("page404.ejs");
     }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>User ID</title>
+</head>
+
+<body>
+    <%- include ('partials/menu.ejs') %>
+        <div class="contents-userstuffs">
+            <h1>Important!</h1>
+            <p>This is your user authentication ID. To log in, you will require this and your password.</p>
+            <p>Please write this down. It will not be shown again.</p>
+            <h3>uuid: <%= uuid %></h3>
+            <br>
+            <p>Proceed to the main page <a href="/posts">here</a></p>
+        </div>
+</body>
+
+</html>

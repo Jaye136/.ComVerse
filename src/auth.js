@@ -26,6 +26,11 @@ export async function loginUser(id, pass) {
     // successful login, refresh page
 }
 
+// set the user manually after signing them up (to avoid fetchUser call since we already have the user object)
+export async function setUserSignUp(user) {
+    currUser = user;
+}
+
 export async function logoffUser() {
     currUser = undefined;
 }

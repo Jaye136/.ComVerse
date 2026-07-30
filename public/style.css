@@ -72,6 +72,18 @@ img {
     max-width: 800px;
 }
 
+.contents-userstuffs {
+    margin: auto;
+    max-width: 500px;
+}
+
+.stiff-userpassfield {
+    font-family: inherit;
+    display: block;
+    resize: none;
+    height: 30px;
+}
+
 .stiff-titlefield {
     font-family: inherit;
     display: block;

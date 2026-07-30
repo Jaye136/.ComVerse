@@ -19,7 +19,7 @@
         <h3 style="margin-top:15px;"><%= poster %></h3>
         </div>
         <% if (currUser) { %>
-            <% if (post.status == 'active' && (authCheck || post.author == curUser.id)) { %>
+            <% if (post.status == 'active' && (authCheck || post.author == currUser.id)) { %>
                 <div class="comption-links" style="margin-top:2px; margin-bottom:0px;">
                     <form action="/posts/<%= post.id %>/delpost" method="post" style="display:inline;">
                         <input type="hidden" name="postAuthorID" value="<%= post.author %>">
