@@ -6,7 +6,7 @@ export async function testStuff() {
     // await restartTables();
     // await testEnvSetUp();
     // await getLoggedIn('member');
-    // await getLoggedIn('mod');
+    await getLoggedIn('mod');
     // await failLogIn('password'); // expect undefined
     // await failLogIn('account'); // expect undefined
     // getLoggedOff(); // expect undefined

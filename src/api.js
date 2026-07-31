@@ -24,7 +24,7 @@ app.get('/posts', async (req, res) => {
     res.render("fpage.ejs", { postList: postList[0], canLoadMore: postList[1] > fetchReqAmount });
 });
 
-app.post('/posts/loadmore', async (req, res) => {
+app.post('/posts', async (req, res) => {
     const postList = await loadPosts();
     res.render("fpage.ejs", { postList: postList[0], canLoadMore: postList[1] > fetchReqAmount });
 });
@@ -118,8 +118,16 @@ app.get("/", (req, res) => {
 });
 
 app.get("/moderation", (req, res) => {
-    if (authCheck) {
-        res.render("moderation.ejs");
+    if (currUser && currUser.role == 'mod') {
+        res.render("moderation.ejs", { searchMade: false, userSearchQuery: [] });
+    } else {
+        return res.status(404).render("page404.ejs");
+    }
+});
+
+app.post("/moderation", (req, res) => {
+    if (currUser && currUser.role == 'mod') {
+        res.render("moderation.ejs", { searchMade: true, userSearchQuery: [] }); // EDIT
     } else {
         return res.status(404).render("page404.ejs");
     }

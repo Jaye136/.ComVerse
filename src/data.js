@@ -122,12 +122,12 @@ export async function loadPost(id) {
 
 // load 10 more posts every time user requests loading older posts
 export async function loadPosts() {
-    // for checking how many posts there are in the db (no need to increment
-    // fetchReqAmount if we've already loaded the entire forum into our feed)
     const [totalPosts] = await connectionPool.query('SELECT COUNT(*) AS total FROM posts');
     const totalNum = totalPosts[0].total;
     if (totalNum >= fetchReqAmount + 10) {
         setFetchReq(fetchReqAmount + 10);
+    } else {
+        setFetchReq(totalNum);
     }
     const [posts] = await connectionPool.query('CALL fetchPosts(?)', [fetchReqAmount]);
     return [posts[0], totalNum];
