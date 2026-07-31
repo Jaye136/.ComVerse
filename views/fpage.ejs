@@ -23,7 +23,14 @@
                     dateStyle: 'medium'
                 }) %></p>
                 </div>
-                <p><%= (post.contents.length > 200)? post.contents.substring(0, 200) + '...' : post.contents %></p>
+                <% if (post.status == 'active') { %>
+                    <p><%= (post.contents.length > 200)? post.contents.substring(0, 200) + '...' : post.contents %></p>
+                <% } else if (post.status == 'deleted' && authCheck) { %>
+                    <p style="color:rgb(132, 132, 132);">Deleted post:
+                        <%= (post.contents.length > 200)? post.contents.substring(0, 200) + '...' : post.contents %></p>
+                <% } else { %>
+                    <p style="color:rgb(132, 132, 132);">[Post has been deleted]</p>
+                <% } %>
             </li>
         <% }) %>
         </ul>
