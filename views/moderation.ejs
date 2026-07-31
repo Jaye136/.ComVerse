@@ -10,10 +10,59 @@
 
 <body>
     <%- include ('partials/menu.ejs') %>
-        <div class="contents">
-            <h1>Moderation options</h1>
-            <h2><a href="/posts">&lt; Back</a></h2>
-            <p>Option here for promoting/demoting a user given an id</p>
+        <div class="contents-userstuffs">
+            <h1 style="margin-bottom:5px">Moderation options</h1>
+
+            <% if (!searchMade) { %>
+                <p>Choose one of the following:</p>
+                <form action="/moderation" method="post">
+                    <label for="uuid" style="margin-bottom:5px;">
+                        Search the user database by uuid (8 characters):</label>
+                    <textarea id="uuid" name="uuid" minlength=8 maxlength=8 placeholder="UUID"
+                        class="stiff-userpassfield needtext-no-ws" autocomplete="off" required></textarea>
+                    <input type="hidden" name="query" value="byuuid"></input>
+                    <button type="submit" style="bottom:50px; font-family:inherit; height:40px;">Search</button>
+                </form>
+                <br>
+                <hr>
+                <br>
+                <form action="/moderation" method="post">
+                    <label for="user" style="margin-bottom:5px;">
+                        Search the user database by display name (max 12 characters):</label>
+                    <textarea id="user" name="user" maxlength=12 placeholder="Username"
+                        class="stiff-userpassfield needtext-no-tn-startendws" autocomplete="off" required></textarea>
+                    <input type="hidden" name="query" value="byname"></input>
+                    <button type="submit" style="bottom:50px; font-family:inherit; height:40px;">Search</button>
+                </form>
+            <% } else { %>
+                <div class="compost-sidetoside">
+                    <h3><a href="/moderation">&lt; Back</a></h3>
+                    <p>Found <%= userSearchQuery.length %> result(s).</p>
+                </div>
+                <br>
+                <% if (userSearchQuery.length != 0) { %>
+                    <ul class="compost-list">
+                    <% userSearchQuery.forEach(user => { %>
+                        <li>
+                            <div class="compost-sidetoside">
+                                <h3 style="display:inline;"><%= user.username %>&nbsp;<span style="font-size:16px;
+                                    color:rgb(132, 132, 132)">(<%= user.role %>)</span></h3>
+                                <form action="/moderation/prodemote" method="post">
+                                    <% const availAction = (user.role=='member' )? 'Promote' : 'Demote' %>
+                                    <input type="hidden" name="action" value="<%= availAction %>"></input>
+                                    <input type="hidden" name="uuid" value="<%= user.id %>"></input>
+                                    <button type="submit" style="font-family:inherit; width:100%; margin-bottom:30px;">
+                                        <%= availAction %></button>
+                                </form>
+                            </div>
+                            <p style="margin-top:0px">User ID: <%= user.id %></p>
+                        </li>
+                    <% }) %>
+                    </ul>
+                <% } else { %>
+                    <p>No results were found for your query.</p>
+                <% } %>
+            <% } %>
         </div>
 </body>
 

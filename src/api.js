@@ -1,6 +1,6 @@
 import express from "express";
 import { addTopComment, addNestComment, deleteComment, loadAllComments, addNewPost, deletePost, loadPost, loadPosts, refreshPosts, registerUser } from "./data.js";
-import { loadSchema } from "./database.js";
+import { connectionPool, loadSchema } from "./database.js";
 import { currUser, fetchReqAmount, loginUser, logoffUser, setUserSignUp } from "./auth.js";
 import { testStuff } from "./testfns.js";
 const app = express();
@@ -125,9 +125,30 @@ app.get("/moderation", (req, res) => {
     }
 });
 
-app.post("/moderation", (req, res) => {
+app.post("/moderation", async (req, res) => {
     if (currUser && currUser.role == 'mod') {
-        res.render("moderation.ejs", { searchMade: true, userSearchQuery: [] }); // EDIT
+        const queryData = req.body;
+        let queryResult;
+        if (queryData.query == 'byuuid') {
+            [queryResult] = await connectionPool.query('CALL fetchUser(?)', [queryData.uuid]);
+        } else { // byuser
+            [queryResult] = await connectionPool.query('CALL fetchUserByName(?)', [queryData.user]);
+        }
+        res.render("moderation.ejs", { searchMade: true, userSearchQuery: queryResult[0] });
+    } else {
+        return res.status(404).render("page404.ejs");
+    }
+});
+
+app.post("/moderation/prodemote", async (req, res) => {
+    if (currUser && currUser.role == 'mod') {
+        const queryData = req.body;
+        if (queryData.action == 'Promote') {
+            await connectionPool.query('CALL promoteUser(?)', [queryData.uuid]);
+        } else {
+            await connectionPool.query('CALL demoteUser(?)', [queryData.uuid]);
+        }
+        res.redirect("/moderation");
     } else {
         return res.status(404).render("page404.ejs");
     }

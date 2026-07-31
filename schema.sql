@@ -27,6 +27,7 @@ CREATE TABLE if NOT EXISTS posts (
 
 DROP PROCEDURE IF EXISTS registerUser;
 DROP PROCEDURE IF EXISTS fetchUser;
+DROP PROCEDURE IF EXISTS fetchUserByName;
 DROP PROCEDURE IF EXISTS promoteUser;
 DROP PROCEDURE IF EXISTS demoteUser;
 
@@ -49,6 +50,14 @@ CREATE PROCEDURE fetchUser
 )
 BEGIN
 	SELECT * FROM users WHERE id = uuid;
+END;
+
+CREATE PROCEDURE fetchUserByName
+(
+	IN user VARCHAR(12)
+)
+BEGIN
+	SELECT * FROM users WHERE username = user;
 END;
 
 CREATE PROCEDURE promoteUser
