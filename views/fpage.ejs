@@ -28,6 +28,19 @@
         <% }) %>
         </ul>
     </div>
+    <% if (canLoadMore) { %>
+        <div class="loadmore" style="display:flex;">
+            <form action="/posts/loadmore" method="post">
+                <button type="submit" style="width:100px; height:30px;">Load more ▼</button>
+            </form>
+        </div>
+    <% } else { %>
+        <div class="loadmore" style="display:none;">
+            <form action="/posts/loadmore" method="post">
+                <button type="submit" style="width:100px; height:30px;">Load more ▼</button>
+            </form>
+        </div>
+    <% } %>
 </body>
 
 </html>

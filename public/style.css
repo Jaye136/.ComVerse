@@ -96,6 +96,23 @@ img {
     max-width: 500px;
 }
 
+.loadmore {
+    align-items: center;
+    justify-content: end;
+    height: 50px;
+    width: 800px;
+    bottom:0px;
+    /*
+    Source - https://stackoverflow.com/q/25982135
+    Posted by Sean Anderson
+    Retrieved 2026-07-30, License - CC BY-SA 3.0
+    */
+    left: 50%;
+    transform: translate(-50%);
+    position: fixed;
+    background-color: #ffffff;
+}
+
 .stiff-userpassfield {
     font-family: monospace;
     font-size: x-large;

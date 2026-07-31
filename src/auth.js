@@ -1,6 +1,6 @@
 import { connectionPool } from "./database.js";
 
-const initFetchAmount = 20;
+const initFetchAmount = 15;
 export let currUser;
 export let fetchReqAmount = initFetchAmount; // session-specific to current user
 
@@ -24,9 +24,11 @@ export async function loginUser(id, pass) {
 
 // set the user manually after signing them up (to avoid fetchUser call since we already have the user object)
 export async function setUserSignUp(user) {
+    setFetchReq(initFetchAmount);
     currUser = user;
 }
 
 export async function logoffUser() {
+    setFetchReq(initFetchAmount);
     currUser = undefined;
 }

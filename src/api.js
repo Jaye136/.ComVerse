@@ -1,7 +1,7 @@
 import express from "express";
-import { addTopComment, addNestComment, deleteComment, loadAllComments, addNewPost, deletePost, loadPost, refreshPosts, registerUser } from "./data.js";
+import { addTopComment, addNestComment, deleteComment, loadAllComments, addNewPost, deletePost, loadPost, loadPosts, refreshPosts, registerUser } from "./data.js";
 import { loadSchema } from "./database.js";
-import { currUser, loginUser, logoffUser, setUserSignUp } from "./auth.js";
+import { currUser, fetchReqAmount, loginUser, logoffUser, setUserSignUp } from "./auth.js";
 import { testStuff } from "./testfns.js";
 const app = express();
 const port = 3000; // high number = lower access
@@ -21,8 +21,12 @@ app.use((res, req, next) => {
 
 app.get('/posts', async (req, res) => {
     const postList = await refreshPosts();
-    res.render("fpage.ejs", { postList }
-    );
+    res.render("fpage.ejs", { postList: postList[0], canLoadMore: postList[1] > fetchReqAmount });
+});
+
+app.post('/posts/loadmore', async (req, res) => {
+    const postList = await loadPosts();
+    res.render("fpage.ejs", { postList: postList[0], canLoadMore: postList[1] > fetchReqAmount });
 });
 
 app.get('/posts/:id', async (req, res) => {

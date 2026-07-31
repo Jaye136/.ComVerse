@@ -120,9 +120,7 @@ export async function loadPost(id) {
     return [match[0][0], poster[0][0].username];
 }
 
-// load posts
-// should start out 30, load 10 more posts every time user requests loading older posts
-// if posts are less than fetchReqAmount, fetchReqAmount shrinks appropriately
+// load 10 more posts every time user requests loading older posts
 export async function loadPosts() {
     // for checking how many posts there are in the db (no need to increment
     // fetchReqAmount if we've already loaded the entire forum into our feed)
@@ -130,16 +128,16 @@ export async function loadPosts() {
     const totalNum = totalPosts[0].total;
     if (totalNum >= fetchReqAmount + 10) {
         setFetchReq(fetchReqAmount + 10);
-    } else {
-        setFetchReq(totalNum);
     }
     const [posts] = await connectionPool.query('CALL fetchPosts(?)', [fetchReqAmount]);
-    return posts[0];
+    return [posts[0], totalNum];
 }
 
 // refresh posts
 // loads the same amount of posts, without adding more
 export async function refreshPosts() {
+    const [totalPosts] = await connectionPool.query('SELECT COUNT(*) AS total FROM posts');
+    const totalNum = totalPosts[0].total;
     const [posts] = await connectionPool.query('CALL fetchPosts(?)', [fetchReqAmount]);
-    return posts[0];
+    return [posts[0], totalNum];
 }
