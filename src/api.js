@@ -77,7 +77,7 @@ app.get("/newpost", (req, res) => {
     }
 });
 
-app.post("/posts", async (req, res) => {
+app.post("/newpost", async (req, res) => {
     const postData = req.body;
     const newPost = await addNewPost(postData.title, postData.contents, currUser.id);
     res.redirect(`posts/${newPost.id}`);

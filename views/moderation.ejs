@@ -10,8 +10,9 @@
 
 <body>
     <%- include ('partials/menu.ejs') %>
+    <div class="body-ontop" style="width:550px">
         <div class="contents-userstuffs">
-            <h1 style="margin-bottom:5px">Moderation options</h1>
+            <h1 style="margin-top:15px; margin-bottom:5px">Moderation options</h1>
 
             <% if (!searchMade) { %>
                 <p>Choose one of the following:</p>
@@ -64,6 +65,7 @@
                 <% } %>
             <% } %>
         </div>
+    </div>
 </body>
 
 </html>

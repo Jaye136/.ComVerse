@@ -10,8 +10,9 @@
 
 <body>
     <%- include ('partials/menu.ejs') %>
+    <div class="body-ontop" style="width:550px">
         <div class="contents-userstuffs">
-            <h1>Sign up</h1>
+            <h1 style="margin-top:15px">Sign up</h1>
 
             <form action="/signup" method="post">
                 <label for="user" style="margin-bottom:5px;">Display name (max 12 characters)</label>
@@ -26,6 +27,7 @@
             <br>
             <p>Returning user? Login <a href="/login">here</a></p>
         </div>
+    </div>
 
     <script src="/needtext.js"></script>
 </body>

@@ -7,10 +7,11 @@
     <title><%= post.title %></title>
 </head>
 
-<body>
-    <%- include ('partials/menu.ejs') %>
+<body style="background-image:url('/alters/leafwiki_background.avif');">
+    <%- include ('../partials/menu.ejs') %>
     <div class="body-ontop" style="width:850px">
         <div class="contents">
+            <div style="font-family:Tahoma,serif; font-size:16px;">
             <h1 style="margin-top:15px; margin-bottom:0px"><%= post.title %></h1>
             <div class="compost-sidetoside" style="z-index:-1;">
             <p style="margin-top:15px;"><%= post.timestamp.toLocaleString(undefined, {
@@ -19,6 +20,10 @@
             }) %></p>
             <h3 style="margin-top:15px;"><%= poster %></h3>
             </div>
+            <% let displayStuff = post.contents
+                .replace(/(^| )(\S+\.(png|jpg|jpeg|gif|webp))/g, '<img src="$2" style="margin-right:20px; float:left; max-width:45%">')
+                .replace(/\<big\>(\s*\S.)\<\/big\>/g, '<h2>$1</h2>');
+            %>
             <% if (currUser) { %>
                 <% if (post.status == 'active') { %>
                     <% if (authCheck || post.author == currUser.id) { %>
@@ -28,26 +33,29 @@
                                 <button type="submit" class="button-aslink">Delete</button>
                             </form>
                         </div>
-                        <p style="margin-top:3px; margin-bottom:35px;
-                            white-space:pre-wrap"><%= post.contents %></p>
+                        <p id="post-contents" style="margin-top:3px; margin-bottom:35px;
+                            white-space:pre-wrap"><%- displayStuff %></p>
                     <% } else { %>
-                        <p style="margin-top:20px; margin-bottom:35px; white-space:pre-wrap"><%= post.contents %></p>
+                        <p id="post-contents" style="margin-top:20px; margin-bottom:35px;
+                            white-space:pre-wrap"><%- displayStuff %></p>
                     <% } %>
                 <% } else if (authCheck) { %>
-                    <p style="margin-top:20px; margin-bottom:35px; color:rgb(132, 132, 132);
-                        white-space:pre-wrap">Deleted post:<br><%= post.contents %></p>
+                    <p id="post-contents" style="margin-top:20px; margin-bottom:35px; color:rgb(132, 132, 132);
+                        white-space:pre-wrap">Deleted page:<br><%- displayStuff %></p>
                 <% } else { %>
-                    <p style="margin-top:20px; margin-bottom:35px; color:rgb(132, 132, 132);
-                        white-space:pre-wrap">[Post has been deleted]</p>
+                    <p id="post-contents" style="margin-top:20px; margin-bottom:35px; color:rgb(132, 132, 132);
+                        white-space:pre-wrap">[Page has been deleted]</p>
                 <% } %>
             <% } else { %>
                 <% if (post.status == 'active') { %>
-                    <p style="margin-top:20px; margin-bottom:35px; white-space:pre-wrap"><%= post.contents %></p>
+                    <p id="post-contents" style="margin-top:20px; margin-bottom:35px;
+                        white-space:pre-wrap"><%- displayStuff %></p>
                 <% } else { %>
-                    <p style="margin-top:20px; margin-bottom:35px; color:rgb(132, 132, 132);
-                        white-space:pre-wrap">[Post has been deleted]</p>
+                    <p id="post-contents" style="margin-top:20px; margin-bottom:35px; color:rgb(132, 132, 132);
+                        white-space:pre-wrap">[Page has been deleted]</p>
                 <% } %>
             <% } %>
+            </div>
 
             <hr>
             
@@ -100,8 +108,8 @@
                                     }) %>
                                 </p>
                             </div>
-                            <%- include ('partials/comptions.ejs', { comAuthorID, comment }) %>
-                            <%- include ('partials/nestments.ejs', { nestComments }) %>
+                            <%- include ('../partials/comptions.ejs', { comAuthorID, comment }) %>
+                            <%- include ('../partials/nestments.ejs', { nestComments }) %>
                         </li>
                     <% }) %>
                 </ul>

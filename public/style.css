@@ -2,10 +2,13 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     word-wrap: break-word;
     margin: auto;
-    /* background-image: url('');
+    /* source: https://unsplash.com/photos/white-clouds-during-daytime-FIKD9t5_5zQ */
+    background-color: #D3DDE1;
+    background-image: url('/background_sample.png');
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed; */
+    background-position: center;
 }
 
 form {
@@ -15,6 +18,15 @@ form {
 
 img {
     width: 100%;
+}
+
+.body-ontop {
+    position: absolute;
+    min-height: 91vh;
+    top: 85px;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: #ffffff;
 }
 
 .menu {
@@ -110,7 +122,6 @@ img {
     left: 50%;
     transform: translate(-50%);
     position: fixed;
-    background-color: #ffffff;
 }
 
 .stiff-userpassfield {

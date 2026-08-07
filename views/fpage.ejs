@@ -10,31 +10,32 @@
 
 <body>
     <%- include ('partials/menu.ejs') %>
-    <div class="contents">
-        <h1>Forum Homepage</h1>
-        <ul class="compost-list">
-        <% postList.forEach(post => { %>
-            <li>
-                <div class="compost-sidetoside">
-                <h2><a href="/posts/<%= post.id %>">
-                    <%= (post.title.length > 30)? post.title.substring(0, 30) + '...' : post.title %></a></h2>
-                <p><%= post.timestamp.toLocaleString(undefined, {
-                    timeStyle: 'short',
-                    dateStyle: 'medium'
-                }) %></p>
-                </div>
-                <% if (post.status == 'active') { %>
-                    <p><%= (post.contents.length > 200)? post.contents.substring(0, 200) + '...' : post.contents %></p>
-                <% } else if (post.status == 'deleted' && authCheck) { %>
-                    <p style="color:rgb(132, 132, 132);">Deleted post:
-                        <%= (post.contents.length > 200)? post.contents.substring(0, 200) + '...' : post.contents %></p>
-                <% } else { %>
-                    <p style="color:rgb(132, 132, 132);">[Post has been deleted]</p>
-                <% } %>
-            </li>
-        <% }) %>
-        </ul>
-    </div>
+    <div class="body-ontop" style="width:850px">
+        <div class="contents">
+            <h1 style="margin-top:15px">Forum Homepage</h1>
+            <ul class="compost-list">
+            <% postList.forEach(post => { %>
+                <li>
+                    <div class="compost-sidetoside">
+                    <h2><a href="/posts/<%= post.id %>">
+                        <%= (post.title.length > 30)? post.title.substring(0, 30) + '...' : post.title %></a></h2>
+                    <p><%= post.timestamp.toLocaleString(undefined, {
+                        timeStyle: 'short',
+                        dateStyle: 'medium'
+                    }) %></p>
+                    </div>
+                    <% if (post.status == 'active') { %>
+                        <p><%= (post.contents.length > 200)? post.contents.substring(0, 200) + '...' : post.contents %></p>
+                    <% } else if (post.status == 'deleted' && authCheck) { %>
+                        <p style="color:rgb(132, 132, 132);">Deleted post:
+                            <%= (post.contents.length > 200)? post.contents.substring(0, 200) + '...' : post.contents %></p>
+                    <% } else { %>
+                        <p style="color:rgb(132, 132, 132);">[Post has been deleted]</p>
+                    <% } %>
+                </li>
+            <% }) %>
+            </ul>
+        </div>
     <% if (canLoadMore) { %>
         <div class="loadmore" style="display:flex;">
             <form action="/posts" method="post">
@@ -42,6 +43,7 @@
             </form>
         </div>
     <% }%>
+    </div>
 </body>
 
 </html>

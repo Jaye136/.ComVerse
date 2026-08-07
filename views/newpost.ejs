@@ -10,10 +10,11 @@
 
 <body>
     <%- include ('partials/menu.ejs') %>
+    <div class="body-ontop" style="width:850px">
         <div class="contents">
-            <h1>Add new post</h1>
+            <h1 style="margin-top:15px">Add new post</h1>
 
-            <form action="/posts" method="post">
+            <form action="/newpost" method="post">
                 <label for="title" style="margin-bottom:5px;">Title (max 200 characters)</label>
                 <textarea id="title" name="title" maxlength=200 placeholder="Summarise your post..."
                     class="stiff-titlefield needtext-no-tn-startendws" style="margin-bottom:15px;" autocomplete="off"
@@ -27,6 +28,7 @@
                 <button type="submit" style="bottom:50px; font-family:inherit; height:40px;">Submit new post</button>
             </form>
         </div>
+    </div>
 
     <script src="/needtext.js"></script>
 </body>
