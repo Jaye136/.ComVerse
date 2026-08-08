@@ -5,7 +5,7 @@
             <div style="display:flex; justify-content:space-between;">
                 <p class="comption-links" style="color:rgb(132, 132, 132)">User ID:<%= comAuthorID %></p>
                 <div class="comption-links">
-                    <button id="replyText" class="button-aslink" onclick="toggleTextField('<%= comment.id %>')">Reply</button>
+                    <button id="replyText-<%= comment.id %>" class="button-aslink" onclick="toggleTextField('<%= comment.id %>')">Reply</button>
                 </div>
             </div>
         <% } else { %>
@@ -16,14 +16,14 @@
                         <input type="hidden" name="comAuthorID" value="<%= comAuthorID %>">
                         <input type="hidden" name="commentID" value="<%= comment.id %>">
                         <button type="submit" class="button-aslink">Delete</button>
-                    </form> | <button id="replyText" class="button-aslink" onclick="toggleTextField('<%= comment.id %>')">Reply</button>
+                    </form> | <button id="replyText-<%= comment.id %>" class="button-aslink" onclick="toggleTextField('<%= comment.id %>')">Reply</button>
                 </div>
             </div>
         <% } %>
     <% } else { %>
         <% if (comment.status == 'deleted' || currUser.id != comAuthorID) { %>
             <div class="comption-links">
-                <button id="replyText" class="button-aslink" onclick="toggleTextField('<%= comment.id %>')">Reply</button>
+                <button id="replyText-<%= comment.id %>" class="button-aslink" onclick="toggleTextField('<%= comment.id %>')">Reply</button>
             </div>
         <% } else { %>
             <div class="comption-links">
@@ -31,7 +31,7 @@
                     <input type="hidden" name="comAuthorID" value="<%= comAuthorID %>">
                     <input type="hidden" name="commentID" value="<%= comment.id %>">
                     <button type="submit" class="button-aslink">Delete</button>
-                </form> | <button class="button-aslink" onclick="toggleTextField('<%= comment.id %>')">Reply</button>
+                </form> | <button id="replyText-<%= comment.id %>" class="button-aslink" onclick="toggleTextField('<%= comment.id %>')">Reply</button>
             </div>
         <% } %>
     <% } %>
@@ -62,7 +62,7 @@
 <script>
     function toggleTextField(commentID) {
         const comField = document.getElementById(`reply-to-${commentID}`);
-        const replyText = document.getElementById('replyText');
+        const replyText = document.getElementById(`replyText-${commentID}`);
         if (comField.style.display == 'none') {
             comField.style.display = 'block';
             replyText.textContent = 'Cancel';
