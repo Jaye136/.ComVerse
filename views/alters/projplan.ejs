@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title><%= post.title %></title>
+</head>
+
+<body style="background-image:url('/alters/renoplanner_background.avif'); background-attachment:scroll; background-size: 155vh 370vh; background-position:top;">
+    <%- include ('../partials/menu.ejs') %>
+    <div class="body-ontop" style="width:850px;">
+        <div class="contents">
+            <div style="font-family:'Trebuchet MS',serif; font-size:20px;">
+            <h1 style="margin-top:15px; margin-bottom:0px; text-align:center;"><%= post.title %></h1>
+            <div class="compost-sidetoside" style="z-index:-1;">
+            <p style="margin-top:15px;"><%= post.timestamp.toLocaleString(undefined, {
+                timeStyle: 'short',
+                dateStyle: 'medium'
+            }) %></p>
+            <h3 style="margin-top:15px;"><%= poster %></h3>
+            </div>
+            <% let displayStuff = post.contents
+                .replace(/(^|\s)(\S+\.(png|jpg|jpeg|gif|webp))/g, '<img src="$2" style="width:100%;">')
+                .replace(/\<big\>(\s*\S.)\<\/big\>/g, '<h2>$1</h2>');
+            %>
+            <% if (currUser) { %>
+                <% if (post.status == 'active') { %>
+                    <% if (authCheck || post.author == currUser.id) { %>
+                        <div class="comption-links" style="margin-top:2px; margin-bottom:0px;">
+                            <form action="/posts/<%= post.id %>/delpost" method="post" style="display:inline;">
+                                <input type="hidden" name="postAuthorID" value="<%= post.author %>">
+                                <button type="submit" class="button-aslink">Mark as completed</button>
+                            </form>
+                        </div>
+                        <p id="post-contents" style="margin-top:3px; margin-bottom:35px;
+                            white-space:pre-wrap"><%- displayStuff %></p>
+                    <% } else { %>
+                        <p id="post-contents" style="margin-top:20px; margin-bottom:35px;
+                            white-space:pre-wrap"><%- displayStuff %></p>
+                    <% } %>
+                <% } else if (authCheck) { %>
+                    <p id="post-contents" style="margin-top:20px; margin-bottom:35px; color:rgb(132, 132, 132);
+                        white-space:pre-wrap">Archived:<br><%- displayStuff %></p>
+                <% } else { %>
+                    <p id="post-contents" style="margin-top:20px; margin-bottom:35px; color:rgb(132, 132, 132);
+                        white-space:pre-wrap">[Project is completed]</p>
+                <% } %>
+            <% } else { %>
+                <% if (post.status == 'active') { %>
+                    <p id="post-contents" style="margin-top:20px; margin-bottom:35px;
+                        white-space:pre-wrap"><%- displayStuff %></p>
+                <% } else { %>
+                    <p id="post-contents" style="margin-top:20px; margin-bottom:35px; color:rgb(132, 132, 132);
+                        white-space:pre-wrap">[Project is completed]</p>
+                <% } %>
+            <% } %>
+            </div>
+
+            <hr>
+            
+            <h2>Project board</h2>
+            <% if (!currUser) { %>
+                <p><a href="/login">Log in</a> to add a progress update.</p>
+            <% } else { %>
+                <form action="/posts/<%= post.id %>/comment" method="post">
+                    <div class="compost-sidetoside">
+                        <label for="comment" style="margin-bottom:5px; align-self:center; margin-bottom:30px;">
+                            Progress update (max 500 characters)</label>
+                        <button type="submit" style="font-family:inherit; align-self:center; margin-bottom:30px;">
+                            Post update</button>
+                    </div>
+                    <textarea id="comment" name="comment" maxlength=500 placeholder="Add a progress update..."
+                        class="stiff-commentfield needtext-no-startn" style="margin-bottom:5px;" autocomplete="off"
+                        required></textarea>
+                    <input type="hidden" name="parent" value="<%= post.id %>"></input>
+                    <input type="hidden" name="parType" value="p"></input>
+                </form>
+            <% } %>
+
+            <% if (commentChunks.length == 0) { %>
+                <p style="margin-top:25px">No progress updates so far.</p>
+            <% } else { %>
+                <ul class="compost-list">
+                    <% let comment;
+                        let author;
+                        let comAuthorID;
+                        let nestComments;
+
+                        commentChunks.forEach(commentBit => {
+                            comment = commentBit[0][0];
+                            author = commentBit[0][1][0];
+                            comAuthorID = commentBit[0][1][1];
+                            nestComments = commentBit[1];
+                    %>
+                        <li style="margin-bottom:10px">
+                            <div class="compost-sidetoside" style="z-index:-1;">
+                                <% if (post.author == comAuthorID) { %>
+                                    <h3 style="display:inline;"><%= author %>&nbsp;
+                                        <span style="font-size:16px; color:rgb(132, 132, 132)">Project lead</span></h3>
+                                <% } else { %>
+                                    <h3><%= author %></h3>
+                                <% } %>
+                                <p>
+                                    <%= comment.timestamp.toLocaleString(undefined, {
+                                        timeStyle: 'short',
+                                        dateStyle: 'medium'
+                                    }) %>
+                                </p>
+                            </div>
+                            <%- include ('../partials/comptions.ejs', { comAuthorID, comment }) %>
+                            <%- include ('../partials/nestments.ejs', { nestComments }) %>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } %>
+        </div>
+    </div>
+
+    <script src="/needtext.js"></script>
+</body>
+
+</html>

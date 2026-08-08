@@ -25,6 +25,6 @@ about computer science in The Art of War. How sneaky.
 Encyclopedia<br>
 Blog post<br>
 Project management board<br>
-Commit message tracking<br>
+Program changelog<br>
 Employee working hour tracking system<br>
 Course pre-requisite visualisation<br>

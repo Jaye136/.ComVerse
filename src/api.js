@@ -40,7 +40,7 @@ app.get('/posts/:id', async (req, res) => {
     const post = loadResult[0];
     const poster = loadResult[1];
     const commentChunks = await loadAllComments(post);
-    res.render("post.ejs", { post, poster, commentChunks });
+    res.render("alters/changelog.ejs", { post, poster, commentChunks });
 });
 
 app.post("/posts/:id/delpost", async (req, res) => {

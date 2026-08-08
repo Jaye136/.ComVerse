@@ -28,3 +28,6 @@ https://unsplash.com/photos/giraffe-standing-near-tree-at-daytime-LK4qTPvWdnM
 https://unsplash.com/photos/green-leaf-plants-xljtGZ2-P3Y
 https://unsplash.com/photos/two-fish-on-a-tray-with-lemons-and-spices-9tYQ8mYMldw
 https://unsplash.com/photos/blue-and-white-checkered-textile-beside-brown-wooden-door--7LeAsLS0FA
+https://unsplash.com/photos/a-bathroom-with-a-toilet-sink-and-mirror-G9tpRhcdeco
+https://unsplash.com/photos/a-living-room-filled-with-furniture-and-a-flat-screen-tv-BZ5tmF2Gg3M
+https://unsplash.com/photos/assorted-hot-air-balloons-flying-at-high-altitude-during-daytime-hpTH5b6mo2s
