@@ -15,44 +15,27 @@ Created by making minor edits to the template. Click the header to expand the co
 
 <details>
     <summary>Encyclopedia</summary>
-
-    ![encyclopedia example](demoimg/alters/wikipost.png)
-
+    <img src="./demoimg/alters/wikipost.png" alt="encyclopedia example" width="60%">
 </details>
-
 <details>
     <summary>Blog post</summary>
-    
-    ![blog post example](demoimg/alters/blogpost.png)
-
+    <img src="./demoimg/alters/blogpost.png" alt="blog post example" width="60%">
 </details>
-
 <details>
     <summary>Project management board</summary>
-
-    ![project management board example](demoimg/alters/projpost.png)
-
+    <img src="./demoimg/alters/projpost.png" alt="project management board example" width="60%">
 </details>
-
 <details>
     <summary>Program changelog</summary>
-
-    ![program changelog example](demoimg/alters/changepost.png)
-
+    <img src="./demoimg/alters/changepost.png" alt="program changelog example" width="60%">
 </details>
-
 <details>
     <summary>Employee working hour tracking system (to be added)</summary>
-
-    ![employee working hour tracking system example](demoimg/alters/notyet.png)
-
+    <img src="./demoimg/alters/notyet.png" alt="employee working hour tracking system example" width="60%">
 </details>
-
 <details>
     <summary>Course pre-requisite visualisation (to be added)</summary>
-
-    ![course pre-requisite visualisation example](demoimg/alters/notyet.png)
-
+    <img src="./demoimg/alters/notyet.png" alt="course pre-requisite visualisation example" width="60%">
 </details>
 
 <hr>
