@@ -14,25 +14,30 @@ specific purpose we needed it for.
 Created by making minor edits to the template. Click the header to expand the corresponding image.
 <details>
     <summary>Encyclopedia</summary>
-    ![encyclopedia example](https://github.com/Jaye136/.ComVerse/blob/main/demoimg/alters/wikipost.png)
+    ![encyclopedia example](https://github.com/Jaye136/.ComVerse/blob/raw/main/demoimg/alters/wikipost.png)
 </details>
 <details>
     <summary>Blog post</summary>
-    ![blog post example](https://github.com/Jaye136/.ComVerse/blob/main/demoimg/alters/blogpost.png)
+    ![blog post example](https://github.com/Jaye136/.ComVerse/blob/raw/main/demoimg/alters/blogpost.png)
 </details>
 <details>
     <summary>Project management board</summary>
-    ![project management board example](https://github.com/Jaye136/.ComVerse/blob/main/demoimg/alters/projpost.png)
+    ![project management board example](https://github.com/Jaye136/.ComVerse/blob/raw/main/demoimg/alters/projpost.png)
 </details>
 <details>
     <summary>Program changelog</summary>
-    ![program changelog example](https://github.com/Jaye136/.ComVerse/blob/main/demoimg/alters/changepost.png)
+    ![program changelog example](https://github.com/Jaye136/.ComVerse/blob/raw/main/demoimg/alters/changepost.png)
 </details>
 <details>
     <summary>Employee working hour tracking system (to be added)</summary>
-    ![employee working hour tracking system example](https://github.com/Jaye136/.ComVerse/blob/main/demoimg/alters/notyet.png)
+    ![employee working hour tracking system example](https://github.com/Jaye136/.ComVerse/blob/raw/main/demoimg/alters/notyet.png)
 </details>
 <details>
     <summary>Course pre-requisite visualisation (to be added)</summary>
-    ![course pre-requisite visualisation example](https://github.com/Jaye136/.ComVerse/blob/main/demoimg/alters/notyet.png)
+    ![course pre-requisite visualisation example](https://github.com/Jaye136/.ComVerse/blob/raw/main/demoimg/alters/notyet.png)
 </details>
+
+<hr>
+
+## Open source details
+Please see LICENSE.md for details and additional credits.
