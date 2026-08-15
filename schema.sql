@@ -17,7 +17,7 @@ CREATE TABLE if NOT EXISTS comments (
 CREATE TABLE if NOT EXISTS posts (
     title VARCHAR(200) NOT NULL,
 	contents VARCHAR(1000) NOT NULL,
-    author CHAR(10) NOT NULL,
+    author CHAR(8) NOT NULL,
     timestamp DATETIME NOT NULL,
     id CHAR(8) PRIMARY KEY,
     status VARCHAR(7) NOT NULL

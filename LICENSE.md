@@ -20,11 +20,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ### Third-party contribution acknowledgements
 
 Some code snippets were adapted from Stack Overflow answers, under the CC BY-SA license. The proper code attributions 
-have been given where necessary. The generic sample background used is under the 
-[Unsplash license](https://help.unsplash.com/en/articles/2612315-can-i-use-unsplash-images-for-personal-or-commercial-projects), 
-and used for non-monetary purposes. The following images used for the example formats are also under the Unsplash 
-license.
+have been given where necessary. The following images included in the GitHub repository are used under the terms of the 
+Unsplash license given [here](https://help.unsplash.com/en/articles/2612315-can-i-use-unsplash-images-for-personal-or-commercial-projects). 
+DOTCOMVERSE does not claim ownership of any content included with the software that was accessed from/created by 
+third-parties.
 
+[Generic sample background](https://unsplash.com/photos/white-clouds-during-daytime-FIKD9t5_5zQ)<br>
 [Encyclopedia giraffe](https://unsplash.com/photos/giraffe-standing-near-tree-at-daytime-LK4qTPvWdnM)<br>
 [Encyclopedia background](https://unsplash.com/photos/green-leaf-plants-xljtGZ2-P3Y)<br>
 [Blogpost food](https://unsplash.com/photos/two-fish-on-a-tray-with-lemons-and-spices-9tYQ8mYMldw)<br>
